@@ -1,0 +1,32 @@
+// Tabela `payments_registered` — registro manual (D12)
+// Gerado por gerador determinístico (seed 20261110). Data de referência: 10/11/2026 14:00 (America/Sao_Paulo).
+export default [
+  {"id":"pay_0001","org_id":"org_reflexo","work_order_id":"wo_001","amount":2479,"method":"pix","registered_by":"usr_manager","at":"2026-05-01T15:15:00.000Z","created_at":"2026-05-01T15:15:00.000Z"},
+  {"id":"pay_0002","org_id":"org_reflexo","work_order_id":"wo_002","amount":1679,"method":"pix","registered_by":"usr_manager","at":"2026-05-08T13:34:00.000Z","created_at":"2026-05-08T13:34:00.000Z"},
+  {"id":"pay_0003","org_id":"org_reflexo","work_order_id":"wo_003","amount":3379,"method":"pix","registered_by":"usr_manager","at":"2026-05-21T16:14:00.000Z","created_at":"2026-05-21T16:14:00.000Z"},
+  {"id":"pay_0004","org_id":"org_reflexo","work_order_id":"wo_004","amount":290,"method":"card","registered_by":"usr_manager","at":"2026-05-25T13:03:00.000Z","created_at":"2026-05-25T13:03:00.000Z"},
+  {"id":"pay_0005","org_id":"org_reflexo","work_order_id":"wo_005","amount":2479,"method":"cash","registered_by":"usr_manager","at":"2026-06-16T18:18:00.000Z","created_at":"2026-06-16T18:18:00.000Z"},
+  {"id":"pay_0006","org_id":"org_reflexo","work_order_id":"wo_006","amount":1679,"method":"pix","registered_by":"usr_manager","at":"2026-07-02T13:20:00.000Z","created_at":"2026-07-02T13:20:00.000Z"},
+  {"id":"pay_0007","org_id":"org_reflexo","work_order_id":"wo_007","amount":290,"method":"cash","registered_by":"usr_manager","at":"2026-07-13T16:25:00.000Z","created_at":"2026-07-13T16:25:00.000Z"},
+  {"id":"pay_0008","org_id":"org_reflexo","work_order_id":"wo_008","amount":2479,"method":"pix","registered_by":"usr_manager","at":"2026-08-11T14:18:00.000Z","created_at":"2026-08-11T14:18:00.000Z"},
+  {"id":"pay_0009","org_id":"org_reflexo","work_order_id":"wo_009","amount":200,"method":"pix","registered_by":"usr_manager","at":"2026-10-15T13:53:00.000Z","created_at":"2026-10-15T13:53:00.000Z"},
+  {"id":"pay_0010","org_id":"org_reflexo","work_order_id":"wo_010","amount":1000,"method":"pix","registered_by":"usr_manager","at":"2026-10-19T20:33:00.000Z","created_at":"2026-10-19T20:33:00.000Z"},
+  {"id":"pay_0011","org_id":"org_reflexo","work_order_id":"wo_011","amount":300,"method":"pix","registered_by":"usr_manager","at":"2026-10-19T11:06:00.000Z","created_at":"2026-10-19T11:06:00.000Z"},
+  {"id":"pay_0012","org_id":"org_reflexo","work_order_id":"wo_012","amount":200,"method":"pix","registered_by":"usr_manager","at":"2026-10-16T18:28:00.000Z","created_at":"2026-10-16T18:28:00.000Z"},
+  {"id":"pay_0013","org_id":"org_reflexo","work_order_id":"wo_013","amount":300,"method":"card","registered_by":"usr_manager","at":"2026-10-22T15:47:00.000Z","created_at":"2026-10-22T15:47:00.000Z"},
+  {"id":"pay_0014","org_id":"org_reflexo","work_order_id":"wo_014","amount":200,"method":"pix","registered_by":"usr_manager","at":"2026-10-23T19:40:00.000Z","created_at":"2026-10-23T19:40:00.000Z"},
+  {"id":"pay_0015","org_id":"org_reflexo","work_order_id":"wo_015","amount":200,"method":"pix","registered_by":"usr_manager","at":"2026-10-27T11:19:00.000Z","created_at":"2026-10-27T11:19:00.000Z"},
+  {"id":"pay_0016","org_id":"org_reflexo","work_order_id":"wo_016","amount":1679,"method":"cash","registered_by":"usr_manager","at":"2026-10-27T11:45:00.000Z","created_at":"2026-10-27T11:45:00.000Z"},
+  {"id":"pay_0017","org_id":"org_reflexo","work_order_id":"wo_017","amount":200,"method":"card","registered_by":"usr_manager","at":"2026-10-22T20:10:00.000Z","created_at":"2026-10-22T20:10:00.000Z"},
+  {"id":"pay_0018","org_id":"org_reflexo","work_order_id":"wo_018","amount":1670,"method":"card","registered_by":"usr_manager","at":"2026-10-30T12:31:00.000Z","created_at":"2026-10-30T12:31:00.000Z"},
+  {"id":"pay_0019","org_id":"org_reflexo","work_order_id":"wo_019","amount":200,"method":"card","registered_by":"usr_manager","at":"2026-10-31T20:47:00.000Z","created_at":"2026-10-31T20:47:00.000Z"},
+  {"id":"pay_0020","org_id":"org_reflexo","work_order_id":"wo_020","amount":200,"method":"card","registered_by":"usr_manager","at":"2026-10-31T15:14:00.000Z","created_at":"2026-10-31T15:14:00.000Z"},
+  {"id":"pay_0021","org_id":"org_reflexo","work_order_id":"wo_021","amount":749,"method":"cash","registered_by":"usr_manager","at":"2026-11-02T15:09:00.000Z","created_at":"2026-11-02T15:09:00.000Z"},
+  {"id":"pay_0022","org_id":"org_reflexo","work_order_id":"wo_022","amount":1979,"method":"card","registered_by":"usr_manager","at":"2026-11-06T19:45:00.000Z","created_at":"2026-11-06T19:45:00.000Z"},
+  {"id":"pay_0023","org_id":"org_reflexo","work_order_id":"wo_023","amount":3379,"method":"card","registered_by":"usr_manager","at":"2026-11-10T16:29:00.000Z","created_at":"2026-11-10T16:29:00.000Z"},
+  {"id":"pay_0024","org_id":"org_reflexo","work_order_id":"wo_024","amount":389,"method":"pix","registered_by":"usr_manager","at":"2026-11-07T15:12:00.000Z","created_at":"2026-11-07T15:12:00.000Z"},
+  {"id":"pay_0025","org_id":"org_reflexo","work_order_id":"wo_025","amount":300,"method":"pix","registered_by":"usr_manager","at":"2026-11-06T14:50:00.000Z","created_at":"2026-11-06T14:50:00.000Z"},
+  {"id":"pay_0026","org_id":"org_reflexo","work_order_id":"wo_027","amount":200,"method":"pix","registered_by":"usr_manager","at":"2026-11-03T12:22:00.000Z","created_at":"2026-11-03T12:22:00.000Z"},
+  {"id":"pay_0027","org_id":"org_reflexo","work_order_id":"wo_032","amount":2749,"method":"pix","registered_by":"usr_manager","at":"2026-11-10T16:30:00.000Z","created_at":"2026-11-10T16:30:00.000Z"},
+  {"id":"pay_0028","org_id":"org_reflexo","work_order_id":"wo_039","amount":289,"method":"pix","registered_by":"usr_manager","at":"2026-11-09T17:00:00.000Z","created_at":"2026-11-09T17:00:00.000Z"}
+];

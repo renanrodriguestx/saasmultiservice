@@ -1,0 +1,45 @@
+/* Tokens de design — estilo shadcn: neutros + cor só para destaque.
+   A cor da marca (--brand) é injetada em runtime a partir de org-config.js.
+   Cores de status são FIXAS e semânticas (nunca a cor do tenant). */
+:root {
+  /* Neutros (zinc) */
+  --bg: #ffffff;
+  --bg-subtle: #fafafa;
+  --bg-muted: #f4f4f5;
+  --border: #e4e4e7;
+  --border-strong: #d4d4d8;
+  --fg: #09090b;
+  --fg-muted: #52525b;      /* 7.7:1 em branco */
+  --fg-subtle: #6b6b74;     /* ≥ 4.6:1 inclusive sobre --bg-muted (#f4f4f5) */
+  --overlay: rgba(9, 9, 11, .45);
+
+  /* Marca do tenant (sobrescrita em runtime) */
+  --brand: #6d28d9;
+  --brand-fg: #ffffff;
+  --brand-soft: #f5f3ff;
+
+  /* Status semânticos fixos (texto ≥ 4.5:1 sobre o fundo *-bg) */
+  --ok: #15803d;      --ok-bg: #f0fdf4;      --ok-border: #bbf7d0;
+  --warn: #b45309;    --warn-bg: #fffbeb;    --warn-border: #fde68a;
+  --danger: #b91c1c;  --danger-bg: #fef2f2;  --danger-border: #fecaca;
+  --info: #1d4ed8;    --info-bg: #eff6ff;    --info-border: #bfdbfe;
+
+  /* Tipografia */
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --fs-xs: 12px; --fs-sm: 13px; --fs-md: 14px; --fs-lg: 16px; --fs-xl: 20px; --fs-2xl: 24px; --fs-3xl: 30px;
+
+  /* Espaço, raio, sombra */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px;
+  --radius-sm: 6px; --radius: 8px; --radius-lg: 12px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,.12);
+  --focus: 0 0 0 2px #fff, 0 0 0 4px var(--fg);
+
+  /* Layout */
+  --topbar-h: 56px;
+  --sidebar-w: 232px;
+  --touch: 44px;   /* alvo mínimo de toque */
+  --annot: #c026d3; /* contorno do modo anotação (ferramenta, não produto) */
+}
