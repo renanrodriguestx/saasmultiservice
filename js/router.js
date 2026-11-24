@@ -12,7 +12,7 @@ export const ROUTES = {
   formularios: { roles: MGMT },
   formulario: { roles: MGMT },
   equipe: { roles: ['owner'] },
-  'meu-dia': { roles: ['operator'] },
+  'meu-dia': { roles: ['operator', 'owner', 'manager', 'admin'] },
   cockpit: { roles: ['platform_admin'] },
 };
 const HOME = { owner: 'painel', manager: 'kanban', admin: 'kanban', operator: 'meu-dia', platform_admin: 'cockpit' };

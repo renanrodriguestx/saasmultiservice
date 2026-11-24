@@ -93,11 +93,26 @@ function protoPill() {
     </div>` : ''}
     <button class="proto-pill" data-action="proto-toggle" aria-expanded="${p.open}" data-fk="proto-pill" title="Ferramentas do protótipo">${icon('sparkle', 'sm')}<span class="lbl">Protótipo · ${esc(t('role.' + state.role))}</span></button></div>`;
 }
+const MGMT_ROLES = ['owner', 'manager', 'admin'];
+/** Dois modos para quem gere e também executa: o modo é só interface; a permissão continua vindo do papel. */
+function hasBothModes() { return MGMT_ROLES.includes(state.role) && store.isExecutor(state.orgId, userId()); }
+function myOpenTasks() {
+  return store.getOpenWorkFor(state.orgId, userId()).items.length;
+}
+function modeSwitch() {
+  if (!hasBothModes()) return '';
+  const exec = state.route.name === 'meu-dia';
+  const n = exec ? 0 : myOpenTasks();
+  return `<nav class="mode-switch" aria-label="Modo" data-ann="mode-switch">
+    <a href="${toHash(homeFor(state.role))}" ${!exec ? 'aria-current="page"' : ''}>Gestão</a>
+    <a href="#meu-dia" ${exec ? 'aria-current="page"' : ''}>Execução${n ? ` <span class="mode-badge" aria-label="${n} ${n === 1 ? 'serviço seu em aberto' : 'serviços seus em aberto'}">${n}</span>` : ''}</a></nav>`;
+}
 function shell(content) {
   const org = store.getOrganization(state.orgId);
   const cfg = org.config;
   const { op, reg } = navItems();
-  const nav = op.length + reg.length > 0;
+  const execMode = state.route.name === 'meu-dia';
+  const nav = !execMode && op.length + reg.length > 0;
   const cur = { subfluxo: 'kanban', cliente: 'clientes', formulario: 'formularios' }[state.route.name] || state.route.name;
   const link = ([k, ic, l], cls = 'nav-item') => `<a class="${cls}" href="${toHash(k)}" ${cur === k ? 'aria-current="page"' : ''} data-ann="nav-labels">${icon(ic)}<span>${esc(l)}</span></a>`;
   const me = store.getProfile(userId());
@@ -108,6 +123,7 @@ function shell(content) {
   <header class="topbar">
     <div class="brand" data-ann="brand"><span class="brand-mark" aria-hidden="true">${esc(cfg.brand.short)}</span><span class="ellipsis hide-sm">${esc(cfg.brand.display_name)}</span></div>
     <span class="spacer"></span>
+    ${modeSwitch()}
     <div class="user-chip" data-ann="role-switch"><span class="avatar" aria-hidden="true">${esc(initials(meName))}</span><span class="who"><strong class="ellipsis">${esc(meName)}</strong><span>${esc(t('role.' + state.role))}</span></span></div>
   </header>
   <div>
@@ -213,6 +229,7 @@ function activeDraftOwner() {
 // ---------- Navegação ----------
 function syncRoute() {
   const r = resolve(state.role, location.hash);
+  if (r.name === 'meu-dia' && state.role !== 'operator' && !store.isExecutor(state.orgId, userId())) { r.name = homeFor(state.role); r.param = null; r.denied = 'meu-dia'; }
   state.route = { name: r.name, param: r.param };
   state.flowMenu = { open: false, q: '' };
   state.moreOpen = false;
@@ -483,6 +500,7 @@ document.addEventListener('change', (e) => {
   if (k === 'cf') { state.cf[el.dataset.key] = el.value; render(); return; }
   if (k === 'cat-show') { state.catS.show = el.value; render(); return; }
   if (k === 'item-assign') { const r = store.reassignItem(state.orgId, el.dataset.item, el.value, userId()); if (r.ok) toast(`Responsável trocado para ${store.getProfile(el.value)?.name.split(' ')[0]}.`); else toast(r.message, 'warn'); return; }
+  if (k === 'team-exec') { const r = store.setExecutes(state.orgId, el.dataset.id, el.checked, userId()); if (!r.ok) { toast(r.message, 'warn'); render(); } else toast(el.checked ? 'Agora executa serviços: aparece como responsável e tem o modo Execução.' : 'Não executa mais serviços.'); return; }
   if (k === 'team-role') { const r = store.changeRole(state.orgId, el.dataset.id, el.value, userId()); if (!r.ok) { toast(r.message, 'warn'); render(); } else toast('Papel alterado.'); return; }
   onField(el, true);
 });

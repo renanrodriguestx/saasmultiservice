@@ -9,7 +9,7 @@ const g = (k) => (gender(k) === 'f' ? 'a' : 'o');
 export function newWoDraft(orgId, stageId) {
   const n = store.now();
   const local = new Date(+n - 3 * 3600e3 + 3600e3);
-  const ops = store.getMembersByRole(orgId, 'operator');
+  const ops = store.getExecutors(orgId);
   return { q: '', customerId: null, assetId: null, newMode: false, newCustomer: { name: '', phone: '', email: '' }, newAsset: {}, items: [], date: local.toISOString().slice(0, 10), time: `${String(local.getUTCHours()).padStart(2, '0')}:00`, leadId: ops[0]?.user_id || '', startStageId: stageId || null, notes: '' };
 }
 const schedOf = (d) => new Date(`${d.date}T${d.time || '08:00'}:00-03:00`);
@@ -21,7 +21,7 @@ export function newWoDrawer(orgId, m) {
   const first = stages[0];
   const arrived = stages.find((s, i) => i > 0 && s.milestone === 'todo');
   const at = store.getAssetType(orgId, 'at_vehicle') || store.getAssetType(orgId, (store.getCustomers(orgId)[0] && store.getAssetsByCustomer(orgId, store.getCustomers(orgId)[0].id)[0]?.asset_type_id));
-  const ops = store.getMembers(orgId).filter((x) => x.role_key === 'operator');
+  const ops = store.getExecutors(orgId);
   const cust = d.customerId ? store.getCustomer(orgId, d.customerId) : null;
   const asset = d.assetId ? store.getAsset(orgId, d.assetId) : null;
   const open = asset ? store.getOpenWorkOrderForAsset(orgId, asset.id) : null;

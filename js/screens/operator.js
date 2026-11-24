@@ -65,8 +65,8 @@ function myDay(orgId, uid) {
 
 // ---------- Telas ----------
 export function renderOperator({ orgId }) {
-  const uid = state.operatorId;
-  const isMember = store.getMembersByRole(orgId, 'operator').some((m) => m.user_id === uid);
+  const uid = state.role === 'operator' ? state.operatorId : state.meId;
+  const isMember = store.isExecutor(orgId, uid);
   const profile = isMember ? store.getProfile(uid) : null;
   let inner;
   if (!profile) inner = `<div class="op-body"><div class="empty" style="margin-top:40px">${icon('user')}<strong>Nenhum ${t('role.operator', { lower: true })} nesta organização</strong><p>Convide a equipe em Cadastros › Equipe.</p></div></div>`;

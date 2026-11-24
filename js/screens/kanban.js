@@ -30,7 +30,7 @@ function flowSwitcher(orgId, active, menu) {
 }
 
 function filtersBar(orgId, f) {
-  const ops = store.getMembersByRole(orgId, 'operator');
+  const ops = store.getExecutors(orgId);
   const cats = store.getCatalogCategories(orgId).filter((c) => store.getCatalogItems(orgId, { kind: 'service' }).some((i) => i.category_id === c.id));
   const active = f.op || f.cat || f.late;
   return `<div class="filters" role="group" aria-label="Filtros" data-ann="filters">

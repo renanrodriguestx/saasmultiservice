@@ -100,7 +100,7 @@ function responsesTab(orgId, fb) {
   const rq = fb.rq;
   const lim = rq.days ? +store.now() - rq.days * 86400e3 : 0;
   const list = store.getFormResponses(orgId, fb.draft.id).filter((r) => new Date(r.created_at) >= lim && (!rq.op || r.submitted_by === rq.op));
-  const ops = store.getMembers(orgId).filter((m) => m.role_key === 'operator');
+  const ops = store.getExecutors(orgId);
   const filters = `<div class="filters"><label class="sr-only" for="rq-days">Período</label><select class="select" id="rq-days" data-rq="days">${[[7, '7 dias'], [28, '28 dias'], [90, '90 dias'], [0, 'Todo o período']].map(([v, l]) => `<option value="${v}" ${Number(rq.days) === v ? 'selected' : ''}>${l}</option>`).join('')}</select>
     <label class="sr-only" for="rq-op">Quem respondeu</label><select class="select" id="rq-op" data-rq="op"><option value="">Qualquer pessoa</option>${ops.map((m) => `<option value="${m.user_id}" ${rq.op === m.user_id ? 'selected' : ''}>${esc(m.profile.name)}</option>`).join('')}</select>
     <div class="row" role="group" aria-label="Visualização"><button class="chip" aria-pressed="${fb.view === 'table'}" data-action="fb-view" data-v="table">Tabela</button><button class="chip" aria-pressed="${fb.view === 'gallery'}" data-action="fb-view" data-v="gallery">${icon('camera', 'sm')} Galeria</button></div>

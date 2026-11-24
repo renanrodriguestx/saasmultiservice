@@ -17,7 +17,7 @@ export function renderServices({ orgId, state }) {
   const rows = queryFor(orgId, sx);
   if (sx.sort === 'duration') rows.sort((a, b) => (b.minutes || 0) - (a.minutes || 0));
   if (sx.sort === 'person') rows.sort((a, b) => (a.item.assignee?.name || '').localeCompare(b.item.assignee?.name || ''));
-  const ops = store.getMembers(orgId).filter((m) => m.role_key === 'operator');
+  const ops = store.getExecutors(orgId);
   const svcs = store.getCatalogItems(orgId, { kind: 'service' });
   const cats = store.getCatalogCategories(orgId).filter((c) => svcs.some((i) => i.category_id === c.id));
   const forms = store.getForms(orgId);

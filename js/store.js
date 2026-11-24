@@ -85,6 +85,9 @@ export function getMembers(orgId) {
 export function getAllMembers(orgId) { return byOrg('memberships', orgId).map((m) => ({ ...m, status: m.status || (m.active ? 'active' : 'inactive'), profile: getProfile(m.user_id) })); }
 export function getMembership(orgId, userId) { return byOrg('memberships', orgId).find((m) => m.user_id === userId) || null; }
 export function getMembersByRole(orgId, role) { return getMembers(orgId).filter((m) => m.role_key === role); }
+/** Quem executa serviços (marcação no membro, não o papel): aparece no app de execução e nas listas de responsável. */
+export function getExecutors(orgId) { return getMembers(orgId).filter((m) => m.executes); }
+export function isExecutor(orgId, userId) { return !!getMembership(orgId, userId)?.executes && getMembership(orgId, userId)?.status === 'active'; }
 export function isPlatformAdmin(userId) { return platform_admins.some((p) => p.user_id === userId); }
 
 // ---------- Catálogo ----------
@@ -991,7 +994,7 @@ export function inviteMember(orgId, { name, contact, role }, byUserId) {
   if (Object.keys(e).length) return { ok: false, errors: e, message: 'Revise os campos destacados.' };
   const p = { id: newId('usr'), org_id: null, name: name.trim(), phone: contact.includes('@') ? null : contact, email: contact.includes('@') ? contact : null, avatar: null, created_at: now().toISOString() };
   db.profiles.push(p);
-  const m = { id: newId('mem'), org_id: orgId, user_id: p.id, unit_id: null, role_key: role, active: false, status: 'invited', invited_at: now().toISOString(), created_at: now().toISOString() };
+  const m = { id: newId('mem'), org_id: orgId, user_id: p.id, unit_id: null, role_key: role, executes: role === 'operator', active: false, status: 'invited', invited_at: now().toISOString(), created_at: now().toISOString() };
   db.memberships.push(m);
   audit(orgId, byUserId, 'create', 'memberships', m.id, null, { name: p.name, role, status: 'invited' });
   emit(); return { ok: true, member: m };
@@ -1007,6 +1010,13 @@ export function changeRole(orgId, membershipId, role, byUserId) {
   if (m.role_key === 'owner' && role !== 'owner' && getMembers(orgId).filter((x) => x.role_key === 'owner').length <= 1) return { ok: false, message: 'Esta é a única pessoa dona da organização. Promova outra pessoa a dona antes de trocar este papel.' };
   audit(orgId, byUserId, 'update', 'memberships', m.id, { role_key: m.role_key }, { role_key: role });
   m.role_key = role; emit(); return { ok: true };
+}
+/** Liga/desliga "executa serviços". Desligar exige não ter serviços em aberto atribuídos. */
+export function setExecutes(orgId, membershipId, value, byUserId) {
+  const m = db.memberships.find((x) => x.org_id === orgId && x.id === membershipId);
+  if (!value) { const open = getOpenWorkFor(orgId, m.user_id).items.length; if (open) return { ok: false, message: `Há ${open} ${open === 1 ? 'serviço em aberto atribuído' : 'serviços em aberto atribuídos'} a esta pessoa. Passe para outra pessoa antes de desligar.` }; }
+  audit(orgId, byUserId, 'update', 'memberships', m.id, { executes: !!m.executes }, { executes: !!value });
+  m.executes = !!value; emit(); return { ok: true };
 }
 /** O que impede desativar: serviços abertos atribuídos e atendimentos abertos em que é responsável. */
 export function getOpenWorkFor(orgId, userId) {

@@ -145,7 +145,7 @@ function rail(orgId, v, cta) {
 }
 
 export function serviceRows(orgId, v, { canAssign, actions = true, onlyUser = null } = {}) {
-  const ops = store.getMembers(orgId).filter((m) => m.role_key === 'operator' || m.role_key === 'manager');
+  const ops = store.getExecutors(orgId);
   const list = v.services.filter((i) => !onlyUser || i.assignee_id === onlyUser);
   if (!list.length) return `<p class="muted">Nenhum ${t('entity.service', { lower: true })}.</p>`;
   return `<div class="stack-sm" data-ann="wo-services">${list.map((i) => {
